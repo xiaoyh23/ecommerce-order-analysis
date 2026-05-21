@@ -70,6 +70,10 @@ ecommerce_order_analysis/
 └── .gitignore
 ```
 
+### 项目架构
+
+![architecture](images/architecture.png)
+
 ---
 
 ## 数据建模逻辑
