@@ -67,11 +67,8 @@ LIMIT 10;
 # 用户复购分析
 
 SELECT 
-    -- 分子：统计下了 2 单及以上已完成订单的用户数
     COUNT(DISTINCT CASE WHEN finish_cnt > 1 THEN user_id END) AS repeat_users,
-    -- 分母：总消费用户数
     COUNT(DISTINCT user_id) AS total_users,
-    -- 复购率
     CONCAT(
     	ROUND(
         	COUNT(DISTINCT CASE WHEN finish_cnt > 1 THEN user_id END) / COUNT(DISTINCT user_id) * 100,
@@ -82,7 +79,6 @@ SELECT
 FROM (
     SELECT 
         user_id, 
-        -- 针对每个用户计算已完成订单数
         SUM(CASE WHEN order_status = '已完成' THEN 1 ELSE 0 END) AS finish_cnt
     FROM orders
     GROUP BY user_id
@@ -106,7 +102,6 @@ SELECT
 FROM orders
 GROUP BY hour
 ORDER BY hour;
-
 
 ## 数据分析结论
 
